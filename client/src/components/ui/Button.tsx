@@ -2,7 +2,7 @@ import * as React from 'react';
 import { cn } from '@/lib/utils';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-    variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';
+    variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'glow';
     size?: 'sm' | 'md' | 'lg';
     isLoading?: boolean;
 }
@@ -10,11 +10,12 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ({ className, variant = 'primary', size = 'md', isLoading, children, ...props }, ref) => {
         const variants = {
-            primary: 'bg-green-600 text-white hover:bg-green-700 shadow-sm',
-            secondary: 'bg-gray-800 text-white hover:bg-gray-900 shadow-sm',
-            outline: 'border border-gray-300 bg-white text-gray-700 hover:bg-gray-50',
-            ghost: 'hover:bg-gray-100 text-gray-700',
-            danger: 'bg-red-600 text-white hover:bg-red-700',
+            primary: 'bg-[var(--primary)] text-black hover:bg-[var(--primary)]/90 shadow-[0_0_15px_var(--primary-glow)] border-none',
+            secondary: 'bg-[var(--surface-highlight)] text-[var(--foreground)] hover:bg-[var(--surface-highlight)]/80 border border-[var(--glass-border)]',
+            outline: 'border border-[var(--primary)] text-[var(--primary)] hover:bg-[var(--primary)]/10 hover:shadow-[0_0_10px_var(--primary-glow)]',
+            ghost: 'hover:bg-[var(--surface-highlight)] text-[var(--foreground)] hover:text-[var(--primary)]',
+            danger: 'bg-red-600 text-white hover:bg-red-700 shadow-sm',
+            glow: 'bg-[var(--secondary)] text-black hover:bg-[var(--secondary)]/90 shadow-[0_0_20px_var(--secondary-glow)]',
         };
 
         const sizes = {

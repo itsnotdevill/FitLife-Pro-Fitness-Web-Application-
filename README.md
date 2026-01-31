@@ -9,6 +9,16 @@ FitLife Pro is a comprehensive web application designed to help users manage the
 *   **Modern UI**: Built with Next.js 14, Tailwind CSS, and Framer Motion.
 *   **Secure Backend**: Node.js/Express with MongoDB Atlas and JWT Authentication.
 
+## 📸 Screenshots
+
+| Home Page | Dashboard |
+|:---:|:---:|
+| ![Home Page](FitLife%20Pro%20SS/Home%20Screen%2001.png) | ![Dashboard](FitLife%20Pro%20SS/System%20Status%2001.png) |
+
+| Login Page | Trainers |
+|:---:|:---:|
+| ![Login Page](FitLife%20Pro%20SS/Login%20Page.png) | ![Trainers](FitLife%20Pro%20SS/Trainers%20Screen%2001.png) |
+
 ## 🛠️ Technology Stack
 
 *   **Frontend**: Next.js (App Router), Tailwind CSS, Lucide React

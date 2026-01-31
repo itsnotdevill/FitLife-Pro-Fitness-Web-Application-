@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/Card';
 import { API_BASE_URL } from '@/lib/utils';
 
+import { Input } from '@/components/ui/Input';
+
 export default function RegisterPage() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -41,65 +43,62 @@ export default function RegisterPage() {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-[calc(100vh-4rem)] px-4">
-            <Card className="w-full max-w-md">
+        <div className="flex items-center justify-center min-h-[calc(100vh-4rem)] px-4 bg-[var(--background)]">
+            <Card className="w-full max-w-md bg-[var(--surface)] border-[var(--glass-border)]">
                 <CardHeader className="space-y-1">
-                    <CardTitle className="text-2xl font-bold text-center">Create an account</CardTitle>
-                    <p className="text-sm text-center text-gray-500">
+                    <CardTitle className="text-2xl font-bold text-center text-white">Create an account</CardTitle>
+                    <p className="text-sm text-center text-gray-400">
                         Enter your email below to create your account
                     </p>
                 </CardHeader>
                 <CardContent>
                     <form onSubmit={handleSubmit} className="space-y-4">
                         {error && (
-                            <div className="bg-red-50 text-red-600 p-3 rounded-md text-sm">
+                            <div className="bg-red-900/50 text-red-200 p-3 rounded-md text-sm border border-red-500/50">
                                 {error}
                             </div>
                         )}
                         <div className="space-y-2">
-                            <label htmlFor="name" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Full Name</label>
-                            <input
+                            <label htmlFor="name" className="text-sm font-medium leading-none text-gray-300">Full Name</label>
+                            <Input
                                 id="name"
                                 type="text"
                                 placeholder="John Doe"
                                 value={name}
-                                onChange={(e) => setName(e.target.value)}
-                                className="flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-600 disabled:cursor-not-allowed disabled:opacity-50"
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
                                 required
                             />
                         </div>
                         <div className="space-y-2">
-                            <label htmlFor="email" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Email</label>
-                            <input
+                            <label htmlFor="email" className="text-sm font-medium leading-none text-gray-300">Email</label>
+                            <Input
                                 id="email"
                                 type="email"
                                 placeholder="m@example.com"
                                 value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                className="flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-600 disabled:cursor-not-allowed disabled:opacity-50"
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                                 required
                             />
                         </div>
                         <div className="space-y-2">
-                            <label htmlFor="password" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Password</label>
-                            <input
+                            <label htmlFor="password" className="text-sm font-medium leading-none text-gray-300">Password</label>
+                            <Input
                                 id="password"
                                 type="password"
                                 value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                className="flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-600 disabled:cursor-not-allowed disabled:opacity-50"
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                                 required
                             />
                         </div>
-                        <Button type="submit" className="w-full" isLoading={isLoading}>
+                        <Button type="submit" variant="glow" className="w-full" isLoading={isLoading}>
                             Sign Up
                         </Button>
                     </form>
                 </CardContent>
                 <CardFooter className="flex justify-center">
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-gray-400">
                         Already have an account?{' '}
-                        <Link href="/login" className="text-green-600 hover:underline">
+                        <Link href="/login" className="text-[var(--primary)] hover:underline">
                             Sign in
                         </Link>
                     </p>

@@ -8,6 +8,30 @@ interface User {
     email: string;
     role: string;
     token: string;
+    level?: number;
+    xp?: number;
+    profile?: {
+        age?: number;
+        height?: number;
+        weight?: number;
+        bmi?: number;
+        bodyType?: string;
+        recoveryScore?: number;
+        heightUnit?: string;
+        weightUnit?: string;
+        neuroStats?: {
+            focusScore: number;
+            stressLevel: number;
+            reactionTime: number;
+        };
+    };
+    dailyQuests?: Array<{
+        title: string;
+        xp: number;
+        completed: boolean;
+        type: string;
+        _id?: string;
+    }>;
 }
 
 interface AuthContextType {
@@ -28,6 +52,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         // Check for token in localStorage on load
         const storedUser = localStorage.getItem('user');
         if (storedUser) {
+            // eslint-disable-next-line react-hooks/exhaustive-deps
             setUser(JSON.parse(storedUser));
         }
         setLoading(false);

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/Card';
+import { Input } from '@/components/ui/Input';
 import { API_BASE_URL } from '@/lib/utils';
 
 export default function LoginPage() {
@@ -40,53 +41,51 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-[calc(100vh-4rem)] px-4">
-            <Card className="w-full max-w-md">
+        <div className="flex items-center justify-center min-h-[calc(100vh-4rem)] px-4 bg-[var(--background)]">
+            <Card className="w-full max-w-md bg-[var(--surface)] border-[var(--glass-border)]">
                 <CardHeader className="space-y-1">
-                    <CardTitle className="text-2xl font-bold text-center">Login</CardTitle>
-                    <p className="text-sm text-center text-gray-500">
+                    <CardTitle className="text-2xl font-bold text-center text-white">Login</CardTitle>
+                    <p className="text-sm text-center text-gray-400">
                         Enter your email and password to access your account
                     </p>
                 </CardHeader>
                 <CardContent>
                     <form onSubmit={handleSubmit} className="space-y-4">
                         {error && (
-                            <div className="bg-red-50 text-red-600 p-3 rounded-md text-sm">
+                            <div className="bg-red-900/50 text-red-200 p-3 rounded-md text-sm border border-red-500/50">
                                 {error}
                             </div>
                         )}
                         <div className="space-y-2">
-                            <label htmlFor="email" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Email</label>
-                            <input
+                            <label htmlFor="email" className="text-sm font-medium leading-none text-gray-300">Email</label>
+                            <Input
                                 id="email"
                                 type="email"
                                 placeholder="m@example.com"
                                 value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                className="flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-600 disabled:cursor-not-allowed disabled:opacity-50"
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                                 required
                             />
                         </div>
                         <div className="space-y-2">
-                            <label htmlFor="password" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Password</label>
-                            <input
+                            <label htmlFor="password" className="text-sm font-medium leading-none text-gray-300">Password</label>
+                            <Input
                                 id="password"
                                 type="password"
                                 value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                className="flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-600 disabled:cursor-not-allowed disabled:opacity-50"
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                                 required
                             />
                         </div>
-                        <Button type="submit" className="w-full" isLoading={isLoading}>
+                        <Button type="submit" variant="glow" className="w-full" isLoading={isLoading}>
                             Sign In
                         </Button>
                     </form>
                 </CardContent>
                 <CardFooter className="flex justify-center">
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-gray-400">
                         Don't have an account?{' '}
-                        <Link href="/register" className="text-green-600 hover:underline">
+                        <Link href="/register" className="text-[var(--primary)] hover:underline">
                             Sign up
                         </Link>
                     </p>

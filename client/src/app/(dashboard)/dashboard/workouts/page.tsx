@@ -3,8 +3,10 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
-import { Plus, Calendar, Clock, Trophy, Trash2, X } from 'lucide-react';
+import { Input } from '@/components/ui/Input';
+import { Plus, Clock, Trophy, Trash2, X, Flame } from 'lucide-react';
 import { API_BASE_URL } from '@/lib/utils';
+import { cn } from '@/lib/utils';
 
 interface Workout {
     _id: string;
@@ -100,161 +102,161 @@ export default function WorkoutsPage() {
     const totalCalories = workouts.reduce((acc, curr) => acc + curr.calories, 0);
 
     return (
-        <div className="space-y-6 relative">
+        <div className="space-y-8">
             <div className="flex justify-between items-center">
                 <div>
-                    <h1 className="text-3xl font-bold tracking-tight text-gray-900">My Workouts</h1>
-                    <p className="text-gray-500">Track and manage your fitness journey.</p>
+                    <h1 className="text-3xl font-bold text-white mb-2">My <span className="text-[var(--primary)]">Workouts</span></h1>
+                    <p className="text-gray-400">Track and manage your fitness journey.</p>
                 </div>
-                <Button className="flex items-center" onClick={() => setShowModal(true)}>
+                <Button variant="glow" className="flex items-center" onClick={() => setShowModal(true)}>
                     <Plus className="mr-2 h-4 w-4" />
                     Log Workout
                 </Button>
             </div>
 
             {/* Stats Cards */}
-            <div className="grid gap-4 md:grid-cols-3">
-                <Card>
+            <div className="grid gap-6 md:grid-cols-3">
+                <Card className="bg-[var(--surface)] border-[var(--glass-border)]">
                     <CardContent className="flex items-center p-6 space-x-4">
-                        <div className="p-4 bg-blue-100 rounded-full text-blue-600">
+                        <div className="p-4 bg-[var(--primary)]/10 rounded-full text-[var(--primary)] border border-[var(--primary)]/20 shadow-[0_0_10px_rgba(0,240,255,0.2)]">
                             <Trophy className="h-6 w-6" />
                         </div>
                         <div>
-                            <p className="text-sm font-medium text-gray-500">Total Workouts</p>
-                            <h3 className="text-2xl font-bold">{totalWorkouts}</h3>
+                            <p className="text-sm font-medium text-gray-400">Total Workouts</p>
+                            <h3 className="text-2xl font-bold text-white">{totalWorkouts}</h3>
                         </div>
                     </CardContent>
                 </Card>
-                <Card>
+                <Card className="bg-[var(--surface)] border-[var(--glass-border)]">
                     <CardContent className="flex items-center p-6 space-x-4">
-                        <div className="p-4 bg-orange-100 rounded-full text-orange-600">
+                        <div className="p-4 bg-[var(--secondary)]/10 rounded-full text-[var(--secondary)] border border-[var(--secondary)]/20 shadow-[0_0_10px_rgba(57,255,20,0.2)]">
                             <Clock className="h-6 w-6" />
                         </div>
                         <div>
-                            <p className="text-sm font-medium text-gray-500">Total Minutes</p>
-                            <h3 className="text-2xl font-bold">{totalDuration}m</h3>
+                            <p className="text-sm font-medium text-gray-400">Total Minutes</p>
+                            <h3 className="text-2xl font-bold text-white">{totalDuration}m</h3>
                         </div>
                     </CardContent>
                 </Card>
-                <Card>
+                <Card className="bg-[var(--surface)] border-[var(--glass-border)]">
                     <CardContent className="flex items-center p-6 space-x-4">
-                        <div className="p-4 bg-red-100 rounded-full text-red-600">
-                            <Trophy className="h-6 w-6" />
+                        <div className="p-4 bg-[var(--accent)]/10 rounded-full text-[var(--accent)] border border-[var(--accent)]/20 shadow-[0_0_10px_rgba(255,0,255,0.2)]">
+                            <Flame className="h-6 w-6" />
                         </div>
                         <div>
-                            <p className="text-sm font-medium text-gray-500">Calories Burned</p>
-                            <h3 className="text-2xl font-bold">{totalCalories}</h3>
+                            <p className="text-sm font-medium text-gray-400">Calories Burned</p>
+                            <h3 className="text-2xl font-bold text-white">{totalCalories}</h3>
                         </div>
                     </CardContent>
                 </Card>
             </div>
 
             {/* List */}
-            <Card className="overflow-hidden">
-                <CardHeader className="bg-gray-50/50 border-b">
-                    <CardTitle>Recent History</CardTitle>
+            <Card className="overflow-hidden bg-[var(--surface)] border-[var(--glass-border)]">
+                <CardHeader className="border-b border-[var(--glass-border)] bg-[var(--surface-highlight)]/20">
+                    <CardTitle className="text-white">Recent History</CardTitle>
                 </CardHeader>
                 <CardContent className="p-0">
                     {isLoading ? (
-                        <div className="p-8 text-center text-gray-500">Loading workouts...</div>
+                        <div className="p-8 text-center text-gray-400">Loading workouts...</div>
                     ) : workouts.length === 0 ? (
-                        <div className="p-8 text-center text-gray-500">No workouts logged yet. Start training!</div>
+                        <div className="p-8 text-center text-gray-400">No workouts logged yet. Start training!</div>
                     ) : (
-                        <table className="w-full text-sm text-left">
-                            <thead className="text-xs text-gray-700 uppercase bg-gray-50 border-b">
-                                <tr>
-                                    <th className="px-6 py-4 font-medium">Workout Name</th>
-                                    <th className="px-6 py-4 font-medium">Date</th>
-                                    <th className="px-6 py-4 font-medium">Duration</th>
-                                    <th className="px-6 py-4 font-medium">Calories</th>
-                                    <th className="px-6 py-4 font-medium">Status</th>
-                                    <th className="px-6 py-4 font-medium text-right">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody className="divide-y divide-gray-100">
-                                {workouts.map((workout) => (
-                                    <tr key={workout._id} className="hover:bg-gray-50 transition-colors">
-                                        <td className="px-6 py-4 font-medium text-gray-900">{workout.name}</td>
-                                        <td className="px-6 py-4 text-gray-500">{new Date(workout.date).toLocaleDateString()}</td>
-                                        <td className="px-6 py-4 text-gray-500">{workout.duration} mins</td>
-                                        <td className="px-6 py-4 text-gray-500">{workout.calories} kcal</td>
-                                        <td className="px-6 py-4">
-                                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                                {workout.status}
-                                            </span>
-                                        </td>
-                                        <td className="px-6 py-4 text-right">
-                                            <button
-                                                onClick={() => handleDelete(workout._id)}
-                                                className="text-red-500 hover:text-red-700 transition"
-                                            >
-                                                <Trash2 className="h-4 w-4" />
-                                            </button>
-                                        </td>
+                        <div className="overflow-x-auto">
+                            <table className="w-full text-sm text-left">
+                                <thead className="text-xs text-gray-400 uppercase bg-[var(--surface-highlight)]/50 border-b border-[var(--glass-border)]">
+                                    <tr>
+                                        <th className="px-6 py-4 font-medium text-[var(--primary)]">Workout Name</th>
+                                        <th className="px-6 py-4 font-medium">Date</th>
+                                        <th className="px-6 py-4 font-medium">Duration</th>
+                                        <th className="px-6 py-4 font-medium">Calories</th>
+                                        <th className="px-6 py-4 font-medium">Status</th>
+                                        <th className="px-6 py-4 font-medium text-right">Actions</th>
                                     </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody className="divide-y divide-[var(--glass-border)]">
+                                    {workouts.map((workout) => (
+                                        <tr key={workout._id} className="hover:bg-[var(--surface-highlight)]/30 transition-colors">
+                                            <td className="px-6 py-4 font-medium text-white">{workout.name}</td>
+                                            <td className="px-6 py-4 text-gray-400">{new Date(workout.date).toLocaleDateString()}</td>
+                                            <td className="px-6 py-4 text-gray-400">{workout.duration} mins</td>
+                                            <td className="px-6 py-4 text-gray-400">{workout.calories} kcal</td>
+                                            <td className="px-6 py-4">
+                                                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[var(--secondary)]/10 text-[var(--secondary)] border border-[var(--secondary)]/30">
+                                                    {workout.status}
+                                                </span>
+                                            </td>
+                                            <td className="px-6 py-4 text-right">
+                                                <button
+                                                    onClick={() => handleDelete(workout._id)}
+                                                    className="text-red-500 hover:text-red-400 transition hover:bg-red-500/10 p-2 rounded-full"
+                                                >
+                                                    <Trash2 className="h-4 w-4" />
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
                     )}
                 </CardContent>
             </Card>
 
-            {/* Simple Modal */}
+            {/* Modal */}
             {showModal && (
-                <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-                    <div className="bg-white rounded-lg shadow-xl w-full max-w-md p-6">
-                        <div className="flex justify-between items-center mb-4">
-                            <h2 className="text-xl font-bold">Log New Workout</h2>
-                            <button onClick={() => setShowModal(false)} className="text-gray-500 hover:text-gray-700">
+                <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+                    <Card className="w-full max-w-md bg-[var(--surface)] border-[var(--primary)] shadow-[0_0_50px_rgba(0,0,0,0.8)]">
+                        <CardHeader className="flex flex-row items-center justify-between border-b border-[var(--glass-border)] pb-4">
+                            <CardTitle className="text-xl font-bold text-white">Log New Workout</CardTitle>
+                            <button onClick={() => setShowModal(false)} className="text-gray-400 hover:text-white transition">
                                 <X className="h-6 w-6" />
                             </button>
-                        </div>
-                        <form onSubmit={handleCreate} className="space-y-4">
-                            <div>
-                                <label className="block text-sm font-medium mb-1">Workout Name</label>
-                                <input
-                                    required
-                                    className="w-full border rounded-md p-2"
-                                    value={formData.name}
-                                    onChange={e => setFormData({ ...formData, name: e.target.value })}
-                                    placeholder="e.g. Morning Cardio"
-                                />
-                            </div>
-                            <div className="grid grid-cols-2 gap-4">
-                                <div>
-                                    <label className="block text-sm font-medium mb-1">Duration (mins)</label>
-                                    <input
-                                        type="number"
+                        </CardHeader>
+                        <CardContent className="pt-6">
+                            <form onSubmit={handleCreate} className="space-y-4">
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium text-gray-300">Workout Name</label>
+                                    <Input
                                         required
-                                        className="w-full border rounded-md p-2"
-                                        value={formData.duration}
-                                        onChange={e => setFormData({ ...formData, duration: e.target.value })}
+                                        value={formData.name}
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, name: e.target.value })}
+                                        placeholder="e.g. Morning Cardio"
                                     />
                                 </div>
-                                <div>
-                                    <label className="block text-sm font-medium mb-1">Calories</label>
-                                    <input
-                                        type="number"
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div className="space-y-2">
+                                        <label className="text-sm font-medium text-gray-300">Duration (mins)</label>
+                                        <Input
+                                            type="number"
+                                            required
+                                            value={formData.duration}
+                                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, duration: e.target.value })}
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-sm font-medium text-gray-300">Calories</label>
+                                        <Input
+                                            type="number"
+                                            required
+                                            value={formData.calories}
+                                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, calories: e.target.value })}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium text-gray-300">Date</label>
+                                    <Input
+                                        type="date"
                                         required
-                                        className="w-full border rounded-md p-2"
-                                        value={formData.calories}
-                                        onChange={e => setFormData({ ...formData, calories: e.target.value })}
+                                        value={formData.date}
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, date: e.target.value })}
                                     />
                                 </div>
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium mb-1">Date</label>
-                                <input
-                                    type="date"
-                                    required
-                                    className="w-full border rounded-md p-2"
-                                    value={formData.date}
-                                    onChange={e => setFormData({ ...formData, date: e.target.value })}
-                                />
-                            </div>
-                            <Button type="submit" className="w-full mt-4">Save Workout</Button>
-                        </form>
-                    </div>
+                                <Button type="submit" variant="glow" className="w-full mt-4">Save Workout</Button>
+                            </form>
+                        </CardContent>
+                    </Card>
                 </div>
             )}
         </div>

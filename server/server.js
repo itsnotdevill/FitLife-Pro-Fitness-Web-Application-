@@ -9,7 +9,10 @@ connectDB();
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true
+}));
 app.use(express.json());
 
 app.get('/', (req, res) => {
@@ -25,11 +28,15 @@ app.use((req, res, next) => {
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/users', require('./routes/userRoutes'));
 app.use('/api/workouts', require('./routes/workoutRoutes'));
+app.use('/api/nutrition', require('./routes/nutritionRoutes'));
+app.use('/api/ai', require('./routes/aiRoutes'));
+app.use('/api/health', require('./routes/healthRoutes'));
+app.use('/api/admin', require('./routes/adminRoutes'));
 
 // Global Error Handler
 app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).json({
+    const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
+    res.status(statusCode).json({
         message: err.message || 'Internal Server Error',
         stack: process.env.NODE_ENV === 'production' ? null : err.stack,
     });
