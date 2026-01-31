@@ -124,6 +124,11 @@ You need to run both the backend and frontend servers.
 |:---:|:---:|
 | ![Neural Profile](FitLife%20Pro%20SS/Neural%20Profile%20.png) | ![NeuroFitness](FitLife%20Pro%20SS/NeuroFitness%2001.png) |
 
+### Admin & Management
+| Admin Dashboard | Management View |
+|:---:|:---:|
+| ![Admin Dashboard](FitLife%20Pro%20SS/Admin%20Panel%2001.png) | ![Management View](FitLife%20Pro%20SS/Admin%20Panel%2002.png) |
+
 ## 👥 Contributors
 
 *   **Developer**: [itsnotdevill](https://github.com/itsnotdevill)
