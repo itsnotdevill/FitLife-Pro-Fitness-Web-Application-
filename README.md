@@ -99,6 +99,31 @@ You need to run both the backend and frontend servers.
 *   **Login**: Access your dashboard.
 *   **Profile**: Update your stats in the dashboard settings.
 
+## 📸 Project Gallery
+
+### Core Interface
+| Home Page | Dashboard |
+|:---:|:---:|
+| ![Home Page](FitLife%20Pro%20SS/Home%20Screen%2001.png) | ![Dashboard](FitLife%20Pro%20SS/System%20Status%2001.png) |
+
+| Login Page | Sign Up |
+|:---:|:---:|
+| ![Login Page](FitLife%20Pro%20SS/Login%20Page.png) | ![Sign Up](FitLife%20Pro%20SS/Sign%20Up%20Page.png) |
+
+### Features & Sections
+| Trainers | Classes |
+|:---:|:---:|
+| ![Trainers](FitLife%20Pro%20SS/Trainers%20Screen%2001.png) | ![Classes](FitLife%20Pro%20SS/Classes%20Screen%20.png) |
+
+| My Workouts | Schedule |
+|:---:|:---:|
+| ![My Workouts](FitLife%20Pro%20SS/My%20Workouts%2001.png) | ![Schedule](FitLife%20Pro%20SS/Schedule%2001.png) |
+
+### Advanced Analytics
+| Neural Profile | Neuro Fitness |
+|:---:|:---:|
+| ![Neural Profile](FitLife%20Pro%20SS/Neural%20Profile%20.png) | ![NeuroFitness](FitLife%20Pro%20SS/NeuroFitness%2001.png) |
+
 ## 👥 Contributors
 
-*   **Developer**: [Your Name]
+*   **Developer**: [itsnotdevill](https://github.com/itsnotdevill)
